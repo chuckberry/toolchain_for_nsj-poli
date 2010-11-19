@@ -74,7 +74,7 @@ LOG_DATA="$TA_LOG_PATH/`date --rfc-3339='date'`.log"
 
 # variant of running kernel, used to find suitable 
 # benchmark for running kernel
-VARIANT="vanilla taskaff"
+VARIANT="taskaff"
 
 echo "Running kernel is: `uname -r`" >> $LOG_DATA
 
@@ -164,7 +164,7 @@ for i in $VARIANT; do
 					LOG_RUN="run_$bench_`uname -r`_${i}_${d}.log" 
 					echo "" >> $LOG_RUN 
 					echo "---> Performance test: Start $bench with $d KB buffer dimension (Try $i)" >> $LOG_RUN
-					BENCH=`echo "$TA_BMARKS" | grep $d`
+					BENCH=`echo "$TA_BMARKS" | grep $d | head -n 1`
 					prepare_for_benchmark >> $LOG_RUN
 					$bench -b "$BENCH" -i "$i" -d "$d" >> $LOG_RUN 2>&1
 					restore_from_benchmark >> $LOG_RUN

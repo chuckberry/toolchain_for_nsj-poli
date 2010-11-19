@@ -206,31 +206,31 @@ do
 	
 	# compute avg exec time of each task and number of migration
 	zcat $DATA_FOLDER/$TRACE_FILE | sed -e '/^#/d' -e 's/: /:/g' | get_task_duration_migr.sh $i > $DATA_FOLDER/$SAMPLE_TIME_TASK
-	AVG_FUN=`calc_stat.sh -f "$DATA_FOLDER/$SAMPLE_TIME_TASK" -n 1 -a`
-	VAR_FUN=`calc_stat.sh -f "$DATA_FOLDER/$SAMPLE_TIME_TASK" -n 1 -v`
-
+#	AVG_FUN=`calc_stat.sh -f "$DATA_FOLDER/$SAMPLE_TIME_TASK" -n 1 -a`
+#	VAR_FUN=`calc_stat.sh -f "$DATA_FOLDER/$SAMPLE_TIME_TASK" -n 1 -v`
+#
 #	generate_histogram.sh $DATA_FOLDER/$SAMPLE_TIME_TASK "us" > hist
 #	COUNT=`cat hist | grep -v "#" | awk '{print $NF}' | (sed -e 's/^/x+=/'; echo "x") | bc`
 #	generate_percentili.sh hist $COUNT > $DATA_FOLDER/$PERC_FILE_TIME_TASK
 #
-	traceplotgif.sh "$DATA_FOLDER/$SAMPLE_TIME_TASK" "$PNG_FOLDER/$IMG_SAMPLE_TIME_TASK" \
-				"$i: Avg_Ex_time_`uname -r`"  "Time (us)" "nr_of_sample"
+#	traceplotgif.sh "$DATA_FOLDER/$SAMPLE_TIME_TASK" "$PNG_FOLDER/$IMG_SAMPLE_TIME_TASK" \
+#				"$i: Avg_Ex_time_`uname -r`"  "Time (us)" "nr_of_sample"
 #	traceplotgif.sh "$DATA_FOLDER/$PERC_FILE_TIME_TASK" "$PNG_FOLDER/$IMG_PERC_FILE_TIME_TASK" \
 #				"fdr of task: $i (us) Avg = $AVG_FUN Var = $VAR_FUN `uname -r`"  "Percentage" "Time (ns)"
 
 	# compute avg sched latency of each task
 	zcat $DATA_FOLDER/$TRACE_FILE | sed -e '/^#/d' -e 's/: /:/g' | get_task_schedlat.sh $i > $DATA_FOLDER/$SAMPLE_SCHED_LAT_TASK
 	
-	AVG_FUN=`calc_stat.sh -f "$DATA_FOLDER/$SAMPLE_SCHED_LAT_TASK" -n 1 -a`
-	# compute uncertainty
-	VAR_FUN=`calc_stat.sh -f "$DATA_FOLDER/$SAMPLE_SCHED_LAT_TASK" -n 1 -u`
-
+#	AVG_FUN=`calc_stat.sh -f "$DATA_FOLDER/$SAMPLE_SCHED_LAT_TASK" -n 1 -a`
+#	# compute uncertainty
+#	VAR_FUN=`calc_stat.sh -f "$DATA_FOLDER/$SAMPLE_SCHED_LAT_TASK" -n 1 -u`
+#
 #	generate_histogram.sh $DATA_FOLDER/$SAMPLE_SCHED_LAT_TASK "us" > hist
 #	COUNT=`cat hist | grep -v "#" | awk '{print $NF}' | (sed -e 's/^/x+=/'; echo "x") | bc`
 #	generate_percentili.sh hist $COUNT > $DATA_FOLDER/$PERC_FILE_SCHED_LAT_TASK
 #
-	traceplotgif.sh "$DATA_FOLDER/$SAMPLE_SCHED_LAT_TASK" "$PNG_FOLDER/$IMG_SAMPLE_SCHED_LAT_TASK" \
-				"$i: Avg_sched_lat_`uname -r`"  "Time (us)" "nr_of_sample"
+#	traceplotgif.sh "$DATA_FOLDER/$SAMPLE_SCHED_LAT_TASK" "$PNG_FOLDER/$IMG_SAMPLE_SCHED_LAT_TASK" \
+#				"$i: Avg_sched_lat_`uname -r`"  "Time (us)" "nr_of_sample"
 #	traceplotgif.sh "$DATA_FOLDER/$PERC_FILE_SCHED_LAT_TASK" "$PNG_FOLDER/$IMG_PERC_FILE_SCHED_LAT_TASK" \
 #				"fdr of task: $i (us) Avg = $AVG_FUN Var = $VAR_FUN `uname -r`"  "Percentage" "Time (ns)"
 

@@ -90,12 +90,12 @@ PREF_ACC="acc"
 
 TITLE_PERC="Percentage_L1_store_misses"
 XLAB_PERC="KB"
-YLAB_PERC="%"
+YLAB_PERC="%_of_L1_write_cache-misses"
 PREFIX_BENCH_PERC="${PREF_PERC}_${PREFIX_BENCH}"
 
 TITLE_ACC="Number_of_L1_store_access"
 XLAB_ACC="KB"
-YLAB_ACC="nr_access"
+YLAB_ACC="number_of_write_access_to_L1_cache"
 PREFIX_BENCH_ACC="${PREF_ACC}_${PREFIX_BENCH}"
 
 touch $DATA_FOLDER/$STATS_FILE

@@ -17,10 +17,10 @@ fi
 
 if [ x"$CPUAFF_TEST" != "x" ]; then
 	KERNEL_IN_USE=`uname -r | cut -d'_' -f 2`
-	if [ $KERNEL_IN_USE != "vanilla" ];then
-		echo "Cpu affinity test run only with vanilla kernel"
-		exit 1;
-	fi
+#	if [ $KERNEL_IN_USE != "vanilla" ];then
+#		echo "Cpu affinity test run only with vanilla kernel"
+#		exit 1;
+#	fi
 else
 	echo "cpuaff test no configured"
 	exit 1;	
@@ -116,7 +116,7 @@ for v in $CPUAFF_TEST; do
 	# Collect benchmarks to use for running kernel
 	# expected filename: taBench-<variant>_<bsize>
 	pushd $TA_BMARKS_PATH >/dev/null
-	TA_BMARKS=`find . -executable -name "nwBench-$v*" -exec basename \{\} \; 2>/dev/null`
+	TA_BMARKS=`find . -executable -name "nwBench-$v*" -exec basename \{\} \; 2>/dev/null | grep $KERNEL_IN_USE`
 	popd >/dev/null 2>&1
 
 	if [ x"$TA_BMARKS" == "x" ]; then
@@ -167,7 +167,7 @@ for v in $CPUAFF_TEST; do
 					LOG_RUN="run_$bench_`uname -r`${CPUAFF_SUFFIX}_${i}_${d}.log" 
 					echo "" >> $LOG_RUN 
 					echo "---> Performance test: Start $bench with $d KB buffer dimension (Try $i)" >> $LOG_RUN
-					BENCH=`echo "$TA_BMARKS" | grep $d`
+					BENCH=`echo "$TA_BMARKS" | grep $d | head -n 1`
 					prepare_for_benchmark >> $LOG_RUN
 					$bench -b "$BENCH" -i "$i" -d "$d" >> $LOG_RUN 2>&1
 					restore_from_benchmark >> $LOG_RUN
@@ -253,6 +253,7 @@ popd >/dev/null 2>&1 #I'm in TA_RESULTS_PATH
 
 popd >/dev/null 2>&1 #I'm in TA_BASE
 
+# change owner of performance test result and log
+chown -R $USER.$GROUP $TA_RESULTS_PATH
+chown -R $USER.$GROUP $TA_LOG_PATH
 rm test_init.env
-
-	

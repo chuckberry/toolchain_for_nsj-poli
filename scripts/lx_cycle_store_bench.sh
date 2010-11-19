@@ -68,7 +68,7 @@ fi
 # --- local variables
 
 MONITOR="${MONITOR_NOTRACE}_${DIM}KB"
-PREFIX="lx_store_bench_${PER_DIM_TAG}"
+PREFIX="lx_cycle_store_bench_${PER_DIM_TAG}"
 PREFIX_BENCH="${PREFIX}_`uname -r`"
 NAME_BENCH="${PREFIX_BENCH}_${ID_BENCH}"
 
@@ -86,7 +86,7 @@ TAG="<$NAME_BENCH><$DIM>"
 # --- header for graphics 
 PREF_PERC="perc"
 
-TITLE_PERC="L2_store_accesses_over_L1_store_references"
+TITLE_PERC="L2_store_miss_over_cycles"
 XLAB_PERC="KB"
 YLAB_PERC="per_10000"
 PREFIX_BENCH_PERC="${PREF_PERC}_${PREFIX_BENCH}"

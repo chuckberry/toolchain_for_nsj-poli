@@ -1,0 +1,6 @@
+export PATH="`pwd`:$PATH"
+export PATH_SCRIPT="`pwd`/scripts"
+export PATH="`pwd`/scripts:$PATH"
+export PATH="/home/mmarini/jobs/bin:$PATH"
+export INIT_SOURCE="test_init.env"
+source $INIT_SOURCE
